@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WE WANT A JOE ROGAN MUTE BUTTON | VOTF Petition</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        ufcred: {
+                            DEFAULT: '#E70814',
+                            bright: '#FF2222',
+                            dark: '#CC0000',
+                            glow: 'rgba(231, 8, 20, 0.6)'
+                        },
+                        ufcdark: {
+                            bg: '#0B0C10',
+                            card: '#141619',
+                            border: '#2A2E35',
+                            accent: '#1F2833'
+                        }
+                    },
+                    fontFamily: {
+                        impact: ['Oswald', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Oswald:wght@500;700;800&display=swap" rel="stylesheet">
+
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            background-color: #0B0C10;
+            color: #F0F2F5;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(231, 8, 20, 0.22) 0%, transparent 60%),
+                linear-gradient(to bottom, #0B0C10, #141619);
+            background-attachment: fixed;
+        }
+
+        /* Pure Red Pulse Animation */
+        @keyframes ufcPulse {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(231, 8, 20, 0.5);
+                border-color: #E70814;
+            }
+            50% {
+                box-shadow: 0 0 35px rgba(255, 34, 34, 0.9);
+                border-color: #FF2222;
+            }
+        }
+
+        .pulse-ufc-red {
+            animation: ufcPulse 2s infinite ease-in-out;
+        }
+
+        /* Red Text Glow */
+        .text-glow-red {
+            text-shadow: 0 0 15px rgba(231, 8, 20, 0.8), 0 0 30px rgba(204, 0, 0, 0.5);
+        }
+
+        /* Octagon Cut Shape */
+        .octagon-badge {
+            clip-path: polygon(
+                25% 0%, 75% 0%, 
+                100% 25%, 100% 75%, 
+                75% 100%, 25% 100%, 
+                0% 75%, 0% 25%
+            );
+        }
+
+        /* Custom Dark Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0C10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A2E35;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #E70814;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-ufcred selection:text-white">
+    <!-- AUDIO GATE: tarayıcı sesi engellerse tek tıkla Joe Rogan'ı başlatır -->
+    <div id="audio-gate" class="hidden fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center text-center px-6 cursor-pointer">
+        <div class="text-6xl mb-4">🎙️</div>
+        <div class="font-impact text-3xl sm:text-5xl text-white uppercase tracking-wider mb-2 text-glow-red">Joe Rogan is live</div>
+        <div class="text-gray-300 text-sm sm:text-base mb-8 max-w-md">Your browser blocks sound until you interact. Tap below to enter with the commentary on.</div>
+        <button type="button" class="bg-gradient-to-r from-[#CC0000] via-[#E70814] to-[#FF2222] text-white font-impact text-xl sm:text-2xl uppercase tracking-wider py-4 px-10 rounded-xl shadow-xl pulse-ufc-red">
+            🔊 Enter &amp; Turn Sound On
+        </button>
+    </div>
+
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-[#CC0000] via-[#E70814] to-[#CC0000] text-white py-2 px-4 text-center text-xs sm:text-sm font-bold uppercase tracking-wider shadow-lg">
+        <span class="inline-flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-white animate-ping"></span>
+            <span>UFC BROADCAST OPTION CAMPAIGN • VOICE OF THE FANS (VOTF) INITIATIVE</span>
+        </span>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="border-b border-ufcdark-border bg-ufcdark-card/90 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            
+            <!-- VOTF Logo with Stylized Octagon Badge -->
+            <div class="flex items-center gap-3">
+                <div class="octagon-badge bg-gradient-to-br from-[#FF2222] to-[#CC0000] text-white font-impact font-extrabold px-3 py-2 text-xl tracking-tighter shadow-lg flex items-center justify-center">
+                    VOTF
+                </div>
+                <div>
+                    <span class="font-impact text-xl sm:text-2xl tracking-wider text-white block leading-none">
+                        VOICE OF THE FANS
+                    </span>
+                    <span class="text-[10px] text-gray-400 font-mono tracking-widest uppercase block mt-0.5">
+                        UFC Fans United
+                    </span>
+                </div>
+            </div>
+
+            <!-- Target Goal Status Badge -->
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex flex-col items-end">
+                    <span class="text-[10px] text-gray-400 font-mono uppercase">Target Goal</span>
+                    <span class="font-impact text-lg text-ufcred-bright">250,000 SIGNATURES</span>
+                </div>
+                <a href="#sign-form-container" class="bg-ufcred hover:bg-ufcred-bright text-white font-impact text-sm uppercase tracking-wider px-5 py-2.5 rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-ufcred/30 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    SIGN NOW
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 sm:py-12 flex-grow w-full space-y-12">
+
+        <!-- CENTERED SHOWCASE CARD -->
+        <section class="bg-ufcdark-card border-2 border-ufcred rounded-2xl p-6 sm:p-10 shadow-2xl relative overflow-hidden pulse-ufc-red">
+            <div class="flex flex-col items-center text-center">
+                
+                <!-- Status Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-950/80 border border-ufcred text-red-400 text-xs font-bold uppercase tracking-widest mb-6">
+                    <span class="w-2 h-2 rounded-full bg-ufcred-bright animate-pulse"></span>
+                    OFFICIAL FAN PETITION
+                </div>
+
+                <!-- CENTERED IMAGE (EXACT SPECIFICATION) -->
+                <div class="relative max-w-sm w-full my-2">
+                    <img id="petition-main-image" src="rogan.jpg" alt="Joe Rogan" class="mx-auto rounded-xl border-4 border-red-600 shadow-2xl max-w-sm w-full object-cover">
+                </div>
+
+                <!-- HEADING POSITIONED DIRECTLY BELOW IMAGE -->
+                <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-wider uppercase text-center mt-6 mb-3 font-impact text-glow-red">
+                    WE WANT A JOE ROGAN MUTE BUTTON
+                </h1>
+
+                <!-- Campaign Description -->
+                <p class="text-gray-300 text-base sm:text-lg max-w-2xl font-light leading-relaxed mb-8">
+                    We respect Joe Rogan as a combat sports icon, but every fight fan deserves audio choices! We petition the UFC to add audio selector options on <span class="text-white font-bold">UFC Fight Pass</span> & <span class="text-white font-bold">PPV Feeds</span> to switch between <span class="text-ufcred-bright font-bold">Full Commentary</span>, <span class="text-ufcred-bright font-bold">Corner Audio Only</span>, or <span class="text-ufcred-bright font-bold">Pure Arena Ambience</span>.
+                </p>
+
+                <!-- AUDIO COMMENTARY SIMULATOR WIDGET -->
+                <div class="w-full max-w-xl bg-black/80 border-2 border-ufcdark-border rounded-xl p-5 sm:p-6 mb-8 text-left shadow-2xl">
+                    <div class="flex justify-between items-center mb-4 border-b border-ufcdark-border pb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl">🎙️</span>
+                            <span class="font-impact text-lg text-white uppercase tracking-wide">Commentary Audio Simulator</span>
+                        </div>
+                        <span id="audio-status-tag" class="bg-red-950 text-red-400 border border-ufcred px-2.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase">
+                            LIVE COMMENTARY PLAYING
+                        </span>
+                    </div>
+
+                    <!-- Audio Waveform Visualizer & Subtitles -->
+                    <div class="bg-zinc-950 border border-zinc-800 rounded-lg p-4 mb-5 text-center relative overflow-hidden">
+                        <canvas id="waveform-canvas" class="w-full h-16 block mb-2"></canvas>
+                        
+                        <div id="subtitle-box" class="bg-black/90 text-yellow-400 font-mono text-xs sm:text-sm py-2 px-3 rounded border border-yellow-500/40 text-center font-bold tracking-wide">
+                            🎙️ JOE ROGAN COMMENTARY LIVE...
+                        </div>
+                    </div>
+
+                    <!-- PULSATING MUTE BUTTON -->
+                    <button 
+                        id="mute-button" 
+                        onclick="toggleMuteState()" 
+                        class="w-full bg-gradient-to-r from-[#CC0000] via-[#E70814] to-[#FF2222] hover:brightness-110 text-white font-impact text-xl sm:text-2xl uppercase tracking-wider py-4 px-6 rounded-xl shadow-xl transition-all transform active:scale-98 flex items-center justify-center gap-3 pulse-ufc-red"
+                    >
+                        <span id="mute-icon" class="text-2xl">🔊</span>
+                        <span id="mute-button-text">MUTE JOE ROGAN</span>
+                    </button>
+
+                    <!-- Alert message container when muted -->
+                    <div id="muted-alert" class="hidden mt-4 bg-red-950/90 border-2 border-ufcred text-white p-3 rounded-lg text-center text-xs font-bold uppercase tracking-wider">
+                        ✅ JOE ROGAN MUTED! ENJOY PURE CORNER AUDIO & ARENA CROWD SOUNDS.
+                    </div>
+                </div>
+
+                <!-- SIGNATURE COUNTER DISPLAY -->
+                <div class="w-full max-w-xl bg-black/60 border border-ufcdark-border p-6 rounded-xl shadow-inner text-left">
+                    <div class="flex justify-between items-end mb-2">
+                        <div>
+                            <span class="text-xs text-gray-400 font-mono uppercase tracking-widest block">Signatures Collected</span>
+                            <span id="signature-count" class="font-impact text-4xl sm:text-5xl text-ufcred-bright">0</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs text-gray-400 font-mono uppercase tracking-widest block">Target Goal</span>
+                            <span class="font-impact text-2xl text-white">250,000</span>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-zinc-900 h-4 rounded-full overflow-hidden border border-zinc-800 relative">
+                        <div id="progress-bar" class="bg-gradient-to-r from-[#CC0000] to-[#FF2222] h-full transition-all duration-700 ease-out" style="width: 0%;"></div>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-3 text-xs text-gray-400 font-mono">
+                        <span class="inline-flex items-center gap-1.5 text-emerald-400">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                            <span>Live Database Connected</span>
+                        </span>
+                        <span id="percentage-text" class="font-bold text-white">0% Complete</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TWO COLUMN LAYOUT: Form & Supporter Feed -->
+        <div id="sign-form-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+            <!-- LEFT: Supporter Sign Form -->
+            <section class="bg-ufcdark-card border border-ufcdark-border rounded-xl p-6 sm:p-8 shadow-xl flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-6 border-b border-ufcdark-border pb-4">
+                        <div class="w-10 h-10 rounded-lg bg-ufcred/20 border border-ufcred flex items-center justify-center text-ufcred-bright font-bold text-xl">
+                            ✍️
+                        </div>
+                        <div>
+                            <h2 class="font-impact text-2xl text-white tracking-wide uppercase">Sign This Petition</h2>
+                            <p class="text-xs text-gray-400">Stand with thousands of fight fans demanding commentary options.</p>
+                        </div>
+                    </div>
+
+                    <form id="petition-form" onsubmit="handleSignatureSubmit(event)" class="space-y-4">
+                        <div>
+                            <label for="fullName" class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1">Full Name / Fan Tag *</label>
+                            <input 
+                                type="text" 
+                                id="fullName" 
+                                required 
+                                placeholder="e.g. Dana White or Octagon_Fan_99" 
+                                class="w-full bg-black border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-ufcred focus:ring-1 focus:ring-ufcred transition-all"
+                            >
+                        </div>
+
+
+                        <div>
+                            <label for="country" class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1">Country *</label>
+                            <select 
+                                id="country" 
+                                required 
+                                class="w-full bg-black border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-ufcred focus:ring-1 focus:ring-ufcred transition-all"
+                            >
+                                <option value="🇺🇸 United States">🇺🇸 United States</option>
+                                <option value="🇨🇦 Canada">🇨🇦 Canada</option>
+                                <option value="🇬🇧 United Kingdom">🇬🇧 United Kingdom</option>
+                                <option value="🇦🇺 Australia">🇦🇺 Australia</option>
+                                <option value="🇧🇷 Brazil">🇧🇷 Brazil</option>
+                                <option value="🇮🇪 Ireland">🇮🇪 Ireland</option>
+                                <option value="🇲🇽 Mexico">🇲🇽 Mexico</option>
+                                <option value="🇩🇪 Germany">🇩🇪 Germany</option>
+                                <option value="🇫🇷 France">🇫🇷 France</option>
+                                <option value="🇯🇵 Japan">🇯🇵 Japan</option>
+                                <option value="🇹🇷 Turkey">🇹🇷 Turkey</option>
+                                <option value="🌍 International">🌍 Other / International</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="comment" class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1">Why do you want a mute button? (Optional)</label>
+                            <textarea 
+                                id="comment" 
+                                rows="3" 
+                                placeholder="e.g. I want to hear coach advice clearly between rounds without shouting!" 
+                                class="w-full bg-black border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-ufcred focus:ring-1 focus:ring-ufcred transition-all resize-none"
+                            ></textarea>
+                        </div>
+
+                        <button 
+                            type="submit" 
+                            id="submit-btn" 
+                            class="w-full bg-gradient-to-r from-[#CC0000] via-[#E70814] to-[#FF2222] hover:brightness-110 text-white font-impact text-xl uppercase tracking-wider py-4 rounded-xl shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 group"
+                        >
+                            <span>SIGN THIS PETITION</span>
+                            <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </button>
+                    </form>
+                </div>
+
+                <div id="form-toast" class="hidden mt-4 bg-emerald-950/90 border border-emerald-500 text-emerald-200 p-4 rounded-xl text-center text-sm font-semibold">
+                    🎉 Signature successfully submitted! Thank you for backing VOTF.
+                </div>
+            </section>
+
+            <!-- RIGHT: Live Supporter Feed -->
+            <section class="bg-ufcdark-card border border-ufcdark-border rounded-xl p-6 sm:p-8 shadow-xl flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-6 pb-4 border-b border-ufcdark-border">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-red-950 border border-ufcred flex items-center justify-center text-ufcred-bright font-bold text-xl">
+                                🔥
+                            </div>
+                            <div>
+                                <h2 class="font-impact text-2xl text-white tracking-wide uppercase">Live Supporter Feed</h2>
+                                <p class="text-xs text-gray-400">Real-time updates from fans across the world.</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] bg-red-950 text-red-400 border border-ufcred px-2 py-0.5 rounded font-mono uppercase">
+                            LIVE FEED
+                        </span>
+                    </div>
+
+                    <div id="supporter-feed" class="space-y-3 max-h-[380px] overflow-y-auto pr-1">
+                        <div class="text-center py-10 text-gray-500 text-xs font-mono">
+                            Loading live signatures...
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-ufcdark-border text-center">
+                    <span class="text-xs text-gray-400 font-mono">Every signature counts towards our 250,000 goal!</span>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- WHY THIS MATTERS SECTION -->
+        <section class="bg-ufcdark-card border border-ufcdark-border rounded-xl p-6 sm:p-8">
+            <h3 class="font-impact text-2xl text-white uppercase tracking-wide mb-6 flex items-center gap-2">
+                <span class="text-ufcred-bright">🥊</span> Why The UFC Should Add Secondary Audio Channels
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-black/80 border border-zinc-800 p-4 rounded-xl">
+                    <h4 class="font-bold text-ufcred-bright text-sm uppercase mb-1">1. Corner Tactics</h4>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Listen to real-time coaching instructions during critical championship rounds without commentary overlap.
+                    </p>
+                </div>
+
+                <div class="bg-black/80 border border-zinc-800 p-4 rounded-xl">
+                    <h4 class="font-bold text-ufcred-bright text-sm uppercase mb-1">2. Pure Octagon Sound</h4>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Experience raw canvas strikes, heavy leg kicks, and natural crowd roars just like sitting cageside.
+                    </p>
+                </div>
+
+                <div class="bg-black/80 border border-zinc-800 p-4 rounded-xl">
+                    <h4 class="font-bold text-ufcred-bright text-sm uppercase mb-1">3. Subscriber Choice</h4>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        NFL, FIFA, and F1 streams offer audio toggles. UFC Fight Pass and PPV subscribers deserve audio choice!
+                    </p>
+                </div>
+
+                <div class="bg-black/80 border border-zinc-800 p-4 rounded-xl">
+                    <h4 class="font-bold text-ufcred-bright text-sm uppercase mb-1">4. Win-Win Solution</h4>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Casual fans keep traditional audio, while hardcore fans get custom commentary channels.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SOCIAL SHARING -->
+            <div class="mt-8 pt-6 border-t border-ufcdark-border flex flex-wrap items-center justify-between gap-4">
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Share This Campaign With Fellow Fight Fans:</span>
+                <div class="flex flex-wrap gap-3">
+                    <button onclick="shareOnTwitter()" class="bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-bold px-4 py-2.5 rounded-lg border border-zinc-700 flex items-center gap-2 transition">
+                        <svg class="w-4 h-4 fill-current text-sky-400" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        Share on X / Twitter
+                    </button>
+                    
+                    <button onclick="shareOnWhatsApp()" class="bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-bold px-4 py-2.5 rounded-lg border border-zinc-700 flex items-center gap-2 transition">
+                        <svg class="w-4 h-4 fill-current text-emerald-400" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                        WhatsApp
+                    </button>
+
+                    <button onclick="copyPetitionUrl()" class="bg-ufcred hover:bg-ufcred-bright text-white text-xs font-bold px-4 py-2.5 rounded-lg flex items-center gap-2 transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                        Copy Link
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-ufcdark-border bg-black py-8 px-4 text-center text-xs text-gray-500 mt-12">
+        <div class="max-w-5xl mx-auto space-y-3">
+            <p class="font-bold text-gray-400 uppercase tracking-wider">
+                WE WANT A JOE ROGAN MUTE BUTTON • VOICE OF THE FANS (VOTF)
+            </p>
+            <p class="max-w-2xl mx-auto text-gray-600 leading-relaxed">
+                Disclaimer: This petition website is an independent grassroots campaign organized by combat sports fans. It is not affiliated with, sponsored by, or endorsed by the Ultimate Fighting Championship (UFC), Zuffa LLC, TKO Group Holdings, or Joe Rogan.
+            </p>
+            <p class="text-gray-600">
+                &copy; 2026 Voice Of The Fans Initiative. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global Target Constant
+        const TARGET_GOAL = 250000;
+        let isAudioMuted = false;
+        let currentSignatureCount = 0;
+
+        // Firebase Configuration setup
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'votf-rogan-mute-petition';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? JSON.parse(__firebase_config) 
+            : { apiKey: "demo-key", authDomain: "demo.firebaseapp.com", projectId: "demo-votf", storageBucket: "demo.appspot.com", messagingSenderId: "12345", appId: "1:12345:web:12345" };
+
+        let db = null;
+        let auth = null;
+        let user = null;
+
+        async function initFirebaseAndRealtime() {
+            try {
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                // Authenticate before query
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                user = auth.currentUser;
+
+                if (!user) return;
+
+                // Mandatory path: /artifacts/{appId}/public/data/signatures
+                const sigCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'signatures');
+
+                // Real-time listener on signatures collection
+                onSnapshot(sigCollectionRef, (snapshot) => {
+                    const signaturesList = [];
+                    snapshot.forEach((doc) => {
+                        signaturesList.push({ id: doc.id, ...doc.data() });
+                    });
+
+                    // Update Count strictly starting at 0 base + document count
+                    currentSignatureCount = signaturesList.length;
+                    updateCounterUI(currentSignatureCount);
+
+                    // Sort in JS memory (newest first)
+                    signaturesList.sort((a, b) => {
+                        const timeA = a.timestamp ? a.timestamp.seconds : 0;
+                        const timeB = b.timestamp ? b.timestamp.seconds : 0;
+                        return timeB - timeA;
+                    });
+
+                    renderSupporterFeed(signaturesList);
+                }, (error) => {
+                    console.warn("Firestore live listener error, falling back to local simulation:", error);
+                    setupLocalFallback();
+                });
+
+            } catch (err) {
+                console.warn("Firebase initialization skipped, running in single-session mode:", err);
+                setupLocalFallback();
+            }
+        }
+
+        function setupLocalFallback() {
+            updateCounterUI(0);
+            renderSupporterFeed([]);
+        }
+
+        // Update UI Counter and Progress Bar
+        function updateCounterUI(count) {
+            const countEl = document.getElementById('signature-count');
+            const progressEl = document.getElementById('progress-bar');
+            const percentageEl = document.getElementById('percentage-text');
+
+            if (countEl) countEl.innerText = count.toLocaleString();
+
+            const pct = Math.min(100, ((count / TARGET_GOAL) * 100)).toFixed(2);
+            if (progressEl) progressEl.style.width = `${pct}%`;
+            if (percentageEl) percentageEl.innerText = `${pct}% Complete`;
+        }
+
+        // Render Supporter Feed items
+        function renderSupporterFeed(signatures) {
+            const feedContainer = document.getElementById('supporter-feed');
+            if (!feedContainer) return;
+
+            if (signatures.length === 0) {
+                feedContainer.innerHTML = `
+                    <div class="text-center py-8 text-gray-500 text-xs font-mono border border-dashed border-zinc-800 rounded-lg">
+                        No signatures recorded yet. Be the first fight fan to sign!
+                    </div>
+                `;
+                return;
+            }
+
+            feedContainer.innerHTML = signatures.map(item => `
+                <div class="bg-black/80 border border-zinc-800 p-3.5 rounded-lg hover:border-ufcred/60 transition">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-bold text-xs text-white flex items-center gap-1.5">
+                            <span>${item.country ? item.country.split(' ')[0] : '🌍'}</span>
+                            <span>${escapeHtml(item.name || 'Anonymous Fan')}</span>
+                        </span>
+                        <span class="text-[10px] text-gray-500 font-mono">${formatTimeAgo(item.timestamp)}</span>
+                    </div>
+                    ${item.comment ? `<p class="text-xs text-gray-300 italic mt-1 font-light">"${escapeHtml(item.comment)}"</p>` : ''}
+                </div>
+            `).join('');
+        }
+
+        window.handleSignatureSubmit = async function(e) {
+            e.preventDefault();
+
+            const nameInput = document.getElementById('fullName');
+            const countryInput = document.getElementById('country');
+            const commentInput = document.getElementById('comment');
+            const submitBtn = document.getElementById('submit-btn');
+
+            const name = nameInput.value.trim();
+            const country = countryInput.value;
+            const comment = commentInput.value.trim();
+
+            if (!name) return;
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "SUBMITTING...";
+
+            try {
+                if (db && user) {
+                    const sigCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'signatures');
+                    await addDoc(sigCollectionRef, {
+                        name: name,
+                        country: country,
+                        comment: comment,
+                        timestamp: serverTimestamp()
+                    });
+                } else {
+                    // Fallback local update
+                    currentSignatureCount += 1;
+                    updateCounterUI(currentSignatureCount);
+                }
+
+                // Trigger celebratory confetti
+                if (window.confetti) {
+                    confetti({
+                        particleCount: 100,
+                        spread: 80,
+                        origin: { y: 0.6 },
+                        colors: ['#E70814', '#FF2222', '#CC0000', '#ffffff']
+                    });
+                }
+
+                // Display success toast
+                const toast = document.getElementById('form-toast');
+                if (toast) {
+                    toast.classList.remove('hidden');
+                    setTimeout(() => toast.classList.add('hidden'), 4000);
+                }
+
+                // Reset inputs
+                nameInput.value = '';
+                commentInput.value = '';
+
+            } catch (err) {
+                console.error("Error submitting signature:", err);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "SIGN THIS PETITION";
+            }
+        };
+
+        // ---- SES DOSYALARI ----
+        // Susturmadan önce: Joe Rogan | Susturduktan sonra: Khabib (köşe sesi). İkisi de döngüde çalar.
+        const roganAudio = new Audio('rogan.mp3');
+        const cornerAudio = new Audio('khabib.mp3');
+        [roganAudio, cornerAudio].forEach(a => { a.loop = true; a.preload = 'auto'; a.volume = 0.9; });
+
+        const SUBTITLE_LIVE_CLASS = "bg-black/90 text-yellow-400 font-mono text-xs sm:text-sm py-2 px-3 rounded border border-yellow-500/40 text-center font-bold tracking-wide";
+
+        function setSubtitle(text) {
+            const box = document.getElementById('subtitle-box');
+            if (box) box.innerText = text;
+        }
+
+        // Aktif parçayı çal, diğerini durdur. Tarayıcı engellerse ilk etkileşimde tekrar dener.
+        function playActiveTrack() {
+            const active = isAudioMuted ? cornerAudio : roganAudio;
+            const other = isAudioMuted ? roganAudio : cornerAudio;
+
+            other.pause();
+            other.currentTime = 0;
+            active.currentTime = 0;
+
+            const gate = document.getElementById('audio-gate');
+            const p = active.play();
+            if (p && typeof p.then === 'function') {
+                p.then(() => {
+                    if (gate) gate.classList.add('hidden');
+                    if (!isAudioMuted) setSubtitle('🎙️ JOE ROGAN COMMENTARY LIVE...');
+                }).catch(() => {
+                    // Autoplay engellendi: kapıyı göster, tıklanınca başlasın
+                    if (!isAudioMuted && gate) gate.classList.remove('hidden');
+                    armFirstInteractionStart();
+                });
+            }
+        }
+
+        let interactionArmed = false;
+        function armFirstInteractionStart() {
+            if (interactionArmed) return;
+            interactionArmed = true;
+            const events = ['click', 'touchend', 'keydown'];
+            const handler = () => {
+                const active = isAudioMuted ? cornerAudio : roganAudio;
+                // Mute butonuna basıldıysa zaten çalıyordur; tekrar baştan başlatma
+                if (active.paused) playActiveTrack();
+                if (!active.paused) {
+                    events.forEach(ev => document.removeEventListener(ev, handler, true));
+                    interactionArmed = false;
+                }
+            };
+            events.forEach(ev => document.addEventListener(ev, handler, true));
+        }
+
+        // Toggle Mute State Button
+        window.toggleMuteState = function() {
+            isAudioMuted = !isAudioMuted;
+
+            const muteBtn = document.getElementById('mute-button');
+            const muteText = document.getElementById('mute-button-text');
+            const muteIcon = document.getElementById('mute-icon');
+            const statusTag = document.getElementById('audio-status-tag');
+            const subtitleBox = document.getElementById('subtitle-box');
+            const mutedAlert = document.getElementById('muted-alert');
+
+            if (isAudioMuted) {
+                // Joe Rogan sesi durur, köşe sesi (2. dosya) başlar
+                playActiveTrack();
+
+                muteBtn.classList.remove('pulse-ufc-red', 'from-[#CC0000]', 'via-[#E70814]', 'to-[#FF2222]');
+                muteBtn.classList.add('bg-zinc-800', 'border-2', 'border-red-600');
+
+                muteIcon.innerText = "🔇";
+                muteText.innerText = "MUTED - JOE ROGAN IS SILENCED";
+
+                statusTag.innerText = "AUDIO MUTED";
+                statusTag.className = "bg-zinc-800 text-gray-400 border border-zinc-700 px-2.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase";
+
+                subtitleBox.innerText = "🎧 CORNER AUDIO PLAYING...";
+                subtitleBox.className = "bg-black/90 text-emerald-400 font-mono text-xs sm:text-sm py-2 px-3 rounded border border-emerald-500/40 text-center font-bold tracking-wide";
+
+                mutedAlert.classList.remove('hidden');
+
+            } else {
+                muteBtn.classList.add('pulse-ufc-red', 'from-[#CC0000]', 'via-[#E70814]', 'to-[#FF2222]');
+                muteBtn.classList.remove('bg-zinc-800', 'border-2', 'border-red-600');
+
+                muteIcon.innerText = "🔊";
+                muteText.innerText = "MUTE JOE ROGAN";
+
+                statusTag.innerText = "LIVE COMMENTARY PLAYING";
+                statusTag.className = "bg-red-950 text-red-400 border border-ufcred px-2.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase";
+
+                mutedAlert.classList.add('hidden');
+
+                subtitleBox.className = SUBTITLE_LIVE_CLASS;
+                playActiveTrack();
+            }
+        };
+
+        function initWaveformVisualizer() {
+            const canvas = document.getElementById('waveform-canvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                canvas.width = canvas.parentElement.clientWidth;
+                canvas.height = canvas.parentElement.clientHeight || 64;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            function render() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                const bars = 32;
+                const barWidth = canvas.width / bars;
+
+                for (let i = 0; i < bars; i++) {
+                    let barHeight;
+                    if (isAudioMuted) {
+                        barHeight = Math.sin(Date.now() * 0.003 + i * 0.3) * 6 + 10;
+                        ctx.fillStyle = '#10B981'; // Emerald corner sound
+                    } else {
+                        barHeight = Math.random() * (canvas.height * 0.7) + 8;
+                        ctx.fillStyle = '#FF2222'; // UFC red energetic spikes
+                    }
+
+                    const x = i * barWidth;
+                    const y = (canvas.height - barHeight) / 2;
+
+                    ctx.fillRect(x + 2, y, barWidth - 4, barHeight);
+                }
+
+                requestAnimationFrame(render);
+            }
+
+            render();
+        }
+
+        // Initialize App on DOM Load
+        window.addEventListener('DOMContentLoaded', () => {
+            initFirebaseAndRealtime();
+            initWaveformVisualizer();
+
+            // Siteye girer girmez Joe Rogan'ı çalmayı dene (engellenirse ilk tıklamada başlar)
+            playActiveTrack();
+
+            const gate = document.getElementById('audio-gate');
+            if (gate) {
+                gate.addEventListener('click', () => {
+                    gate.classList.add('hidden');
+                    const active = isAudioMuted ? cornerAudio : roganAudio;
+                    if (active.paused) playActiveTrack();
+                });
+            }
+        });
+
+        // Helper: Share links
+        window.shareOnTwitter = function() {
+            const text = encodeURIComponent("I just signed the petition for a Joe Rogan Mute Button on UFC broadcasts! Give fight fans custom audio feeds! 🥊🔊 #UFC #MMA #VOTF");
+            window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+        };
+
+        window.shareOnWhatsApp = function() {
+            const text = encodeURIComponent("Join thousands of fight fans demanding a Joe Rogan Mute Button on UFC Fight Pass & PPV broadcasts!");
+            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+        };
+
+        window.copyPetitionUrl = function() {
+            const input = document.createElement('input');
+            input.value = window.location.href;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+
+            alert("Petition link copied to clipboard!");
+        };
+
+        function formatTimeAgo(timestamp) {
+            if (!timestamp) return 'Just now';
+            const seconds = timestamp.seconds ? timestamp.seconds : Math.floor(Date.now() / 1000);
+            const diff = Math.floor(Date.now() / 1000) - seconds;
+            if (diff < 60) return 'Just now';
+            if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+            if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+            return `${Math.floor(diff / 86400)}d ago`;
+        }
+
+        function escapeHtml(str) {
+            return (str || '').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
